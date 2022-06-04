@@ -1,0 +1,16 @@
+CREATE TABLE Collections_Albums (
+    collectionID INTEGER NOT NULL,
+    albumID INTEGER NOT NULL,
+    PRIMARY KEY (collectionID, albumID),
+    FOREIGN KEY (collectionID) REFERENCES Collections,
+    FOREIGN KEY (albumID) REFERENCES Albums
+);
+
+insertPair:
+INSERT INTO Collections_Albums
+VALUES ?;
+
+getAlbumsForCollection:
+SELECT title, artist, imageUrl, link FROM Albums
+LEFT JOIN Collections_Albums ON Collections_Albums.albumID = Albums.id
+WHERE Collections_Albums.collectionID = ?;

@@ -1,0 +1,22 @@
+CREATE TABLE Albums (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    artist TEXT,
+    link TEXT,
+    imageUrl TEXT
+);
+
+selectAll:
+SELECT * FROM Albums;
+
+selectAlbumByName:
+SELECT id, title, imageUrl FROM Albums
+WHERE title LIKE ('%' || :title);
+
+insertAlbum:
+INSERT INTO Albums(title, artist, link, imageUrl)
+VALUES (?, ?, ?, ?);
+
+deleteAlbum:
+DELETE FROM Albums
+WHERE id = :id;

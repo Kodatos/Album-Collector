@@ -1,0 +1,22 @@
+CREATE TABLE Collections (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    imageUrl TEXT
+);
+
+selectAll:
+SELECT * FROM Collections;
+
+insertCollection:
+INSERT INTO Collections(name, imageUrl)
+VALUES (?, ?);
+
+deleteCollection:
+DELETE FROM Collections
+WHERE id = :id;
+
+updateCollection:
+UPDATE Collections
+SET name = :name,
+    imageUrl = :imageUrl
+WHERE id = :id;
