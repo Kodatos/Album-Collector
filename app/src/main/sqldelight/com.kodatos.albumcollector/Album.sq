@@ -1,7 +1,7 @@
 CREATE TABLE Albums (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    artist TEXT,
+    artist TEXT NOT NULL,
     link TEXT,
     imageUrl TEXT
 );
@@ -9,9 +9,16 @@ CREATE TABLE Albums (
 selectAll:
 SELECT * FROM Albums;
 
-selectAlbumByName:
+selectAlbumsByName:
 SELECT id, title, imageUrl FROM Albums
 WHERE title LIKE ('%' || :title);
+
+selectAlbumById:
+SELECT * FROM Albums
+WHERE id = ?;
+
+selectLastInserted:
+SELECT last_insert_rowid();
 
 insertAlbum:
 INSERT INTO Albums(title, artist, link, imageUrl)
