@@ -15,7 +15,7 @@ DELETE FROM Collections_Albums
 WHERE collectionID = ? AND albumID = ?;
 
 getAlbumsForCollection:
-SELECT title, artist, imageUrl, link FROM Albums
+SELECT id, title, artist, imageUrl, link FROM Albums
 LEFT JOIN Collections_Albums ON Collections_Albums.albumID = Albums.id
 WHERE Collections_Albums.collectionID = ?;
 

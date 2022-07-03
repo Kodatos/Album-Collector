@@ -10,7 +10,7 @@ selectAll:
 SELECT * FROM Albums;
 
 selectAlbumsByName:
-SELECT id, title, imageUrl FROM Albums
+SELECT id, title, imageUrl, artist FROM Albums
 WHERE title LIKE ('%' || :title);
 
 selectAlbumById:

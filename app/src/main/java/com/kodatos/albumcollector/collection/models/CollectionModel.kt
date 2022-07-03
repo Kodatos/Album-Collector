@@ -1,4 +1,4 @@
-package com.kodatos.albumcollector.collection
+package com.kodatos.albumcollector.collection.models
 
 data class CollectionModel(
     val name: String,

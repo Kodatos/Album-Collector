@@ -1,15 +1,10 @@
 package com.kodatos.albumcollector.collection
 
-import android.content.Context
-import com.kodatos.albumcollector.Constants
-import com.kodatos.albumcollector.Database
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
+import com.kodatos.albumcollector.collection.domain.CollectionsDomain
+import com.kodatos.albumcollector.collection.domain.CollectionsDomainImpl
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @Module
@@ -17,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class CollectionsModule {
 
     @Binds
-    abstract fun bindCollectionsRepository(collectionsRepositoryImpl: CollectionsRepositoryImpl): CollectionsRepository
+    abstract fun bindCollectionsDomain(collectionsDomainImpl: CollectionsDomainImpl): CollectionsDomain
 
 }
