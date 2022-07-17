@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Album Collector</string>
+    <string name="collection_edit">EDIT</string>
+    <string name="delete_edit">DELETE</string>
 </resources>

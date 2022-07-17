@@ -13,7 +13,7 @@ class CollectionsDomainImpl @Inject constructor(
     private val database: Database
 ) : CollectionsDomain {
 
-    override suspend fun getAllCollections(): Flow<List<CollectionModel>> {
+    override fun getAllCollections(): Flow<List<CollectionModel>> {
         return database.collectionQueries.selectAll(::mapToCollectionModel).asFlow().mapToList()
     }
 

@@ -27,3 +27,11 @@ VALUES (?, ?, ?, ?);
 deleteAlbum:
 DELETE FROM Albums
 WHERE id = :id;
+
+updateAlbum:
+UPDATE Albums
+SET title = :title,
+    artist = :artist,
+    link = :link,
+    imageUrl = :imageUrl
+WHERE id = :id;

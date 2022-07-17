@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CollectionsDomain {
 
-    suspend fun getAllCollections(): Flow<List<CollectionModel>>
+    fun getAllCollections(): Flow<List<CollectionModel>>
 
     suspend fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>>
 

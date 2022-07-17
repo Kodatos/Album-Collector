@@ -27,4 +27,11 @@
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse</item>
     </style>
+
+    <style name="AppTheme.TextButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textSize">18sp</item>
+        <item name="iconSize">20sp</item>
+        <item name="iconPadding">9sp</item>
+    </style>
 </resources>
