@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/add_collections_header"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="0.75dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.3"
+        android:background="?attr/colorOnSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:layout_margin="16dp"
+        android:background="?attr/colorSurfaceVariant"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_album"
+        app:contentPadding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+        app:tint="?attr/colorSecondary" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_el"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/collection_name_label"
+        app:layout_constraintBottom_toTopOf="@id/img_el"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="@id/img"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/img_el"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/collection_image_label"
+        app:layout_constraintBottom_toBottomOf="@id/img"
+        app:layout_constraintEnd_toStartOf="@id/refresh_image"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/name_el"
+        app:startIconDrawable="@drawable/ic_link">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/refresh_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="@id/img_el"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_el"
+        app:layout_constraintTop_toTopOf="@id/img_el"
+        app:tint="?attr/colorPrimary" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        app:icon="@drawable/ic_save"
+        android:text="@string/save_collection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

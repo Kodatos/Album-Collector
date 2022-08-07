@@ -2,10 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/allCollectionsFragment">
+    app:startDestination="@id/allCollectionsScreen">
 
     <fragment
-        android:id="@+id/allCollectionsFragment"
+        android:id="@+id/allCollectionsScreen"
         android:name="com.kodatos.albumcollector.collection.ui.AllCollectionsScreen"
-        android:label="AllCollectionsFragment" />
+        android:label="AllCollectionsScreen" >
+        <action
+            android:id="@+id/add_collection"
+            app:destination="@id/addCollectionDialog"
+            />
+    </fragment>
+
+    <dialog
+        android:id="@+id/addCollectionDialog"
+        android:name="com.kodatos.albumcollector.collection.ui.AddCollectionDialog"
+        android:label="AddCollectionDialog"
+        />
 </navigation>

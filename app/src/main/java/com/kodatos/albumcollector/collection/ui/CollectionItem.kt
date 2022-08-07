@@ -1,13 +1,52 @@
 package com.kodatos.albumcollector.collection.ui
 
+import androidx.core.graphics.ColorUtils
+import androidx.core.view.isVisible
+import coil.load
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.models.CollectionModel
-import com.kodatos.albumcollector.core.ui.RecyclerViewItem
+import com.kodatos.albumcollector.core.adapter.DiffRecyclerViewItem
+import com.kodatos.albumcollector.core.adapter.RecyclerViewItem
+import com.kodatos.albumcollector.core.ui.context
+import com.kodatos.albumcollector.core.ui.dynamicColors
+import com.kodatos.albumcollector.core.ui.setTint
 import com.kodatos.albumcollector.databinding.CollectionItemBinding
 
-fun collectionItem(collectionModel: CollectionModel) = RecyclerViewItem(
-    R.layout.collection_item,
-    getBinding = CollectionItemBinding::bind
-) {
+fun collectionItem(collectionModel: CollectionModel, listener: CollectionItemListener) =
+    DiffRecyclerViewItem(
+        R.layout.collection_item,
+        itemID = collectionModel.id,
+        getBinding = CollectionItemBinding::bind,
+    ) {
+        editLayout.isVisible = false
+        val dynamicColors = context.dynamicColors
+        editLayout.setBackgroundColor(
+            ColorUtils.setAlphaComponent(
+                dynamicColors.primaryContainer,
+                BG_ALPHA
+            )
+        )
+        name.text = collectionModel.name
+        img.load(collectionModel.imageURL)
+        root.setOnClickListener { listener.onAction(CollectionItemListener.View) }
+        root.setOnLongClickListener {
+            editLayout.isVisible = !editLayout.isVisible
+            true
+        }
+        editLayout.setOnClickListener { editLayout.isVisible = false }
+        edit.setOnClickListener { listener.onAction(CollectionItemListener.Edit) }
+        edit.setTint(dynamicColors.onPrimaryContainer)
+        delete.setOnClickListener { listener.onAction(CollectionItemListener.Delete) }
+        delete.setTint(dynamicColors.onPrimaryContainer)
+    }
 
+fun interface CollectionItemListener {
+    fun onAction(action: Action)
+
+    sealed interface Action
+    object Edit : Action
+    object Delete : Action
+    object View : Action
 }
+
+private const val BG_ALPHA = 144

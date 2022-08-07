@@ -1,4 +1,4 @@
-package com.kodatos.albumcollector.core.ui
+package com.kodatos.albumcollector.core.adapter
 
 import android.view.View
 import androidx.viewbinding.ViewBinding
@@ -29,9 +29,9 @@ open class RecyclerViewItem<T : ViewBinding>(
 open class DiffRecyclerViewItem<T : ViewBinding>(
     layoutID: Int,
     spanCount: Int = 1,
+    private val itemID: Long,
     getBinding: (view: View) -> T,
     bindItem: T.(position: Int) -> Unit,
-    private val itemID: Long,
 ) : RecyclerViewItem<T>(layoutID, spanCount, getBinding = getBinding, bindItem = bindItem) {
 
     override fun getId(): Long {

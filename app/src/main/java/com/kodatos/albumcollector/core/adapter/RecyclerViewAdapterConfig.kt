@@ -1,4 +1,4 @@
-package com.kodatos.albumcollector.core.ui
+package com.kodatos.albumcollector.core.adapter
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView

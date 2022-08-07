@@ -15,7 +15,7 @@ import javax.inject.Inject
 class AllCollectionsViewmodel @Inject constructor(
     private val collectionsDomain: CollectionsDomain,
     private val dispatcherProvider: DispatcherProvider
-): ViewModel() {
+) : ViewModel() {
 
     private val _collections = MutableStateFlow<AllCollectionsState>(AllCollectionsState.Loading)
     val collections: StateFlow<AllCollectionsState>
@@ -24,7 +24,7 @@ class AllCollectionsViewmodel @Inject constructor(
     init {
         viewModelScope.launch(dispatcherProvider.DEFAULT) {
             collectionsDomain.getAllCollections().collect {
-                _collections.value = if(it.isEmpty())
+                _collections.value = if (it.isEmpty())
                     AllCollectionsState.Empty
                 else AllCollectionsState.CollectionsList(it)
             }
@@ -33,9 +33,11 @@ class AllCollectionsViewmodel @Inject constructor(
 }
 
 sealed interface AllCollectionsState {
-    object Loading: AllCollectionsState
-    object Empty: AllCollectionsState
+    object Loading : AllCollectionsState
+    object Empty : AllCollectionsState
+
     @JvmInline
-    value class CollectionsList(val list: List<CollectionModel>): AllCollectionsState
+    value class CollectionsList(val list: List<CollectionModel>) : AllCollectionsState,
+        List<CollectionModel> by list
 
 }

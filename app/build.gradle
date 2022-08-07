@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk sdk_version
 
     defaultConfig {
         applicationId "com.kodatos.albumcollector"
@@ -52,6 +52,8 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$activity_version"
     implementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
     implementation "com.squareup.sqldelight:coroutines-extensions-jvm:$sqldelight_version"
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation "androidx.palette:palette-ktx:1.0.0"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

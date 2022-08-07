@@ -6,7 +6,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/header"
-        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Header"/>
