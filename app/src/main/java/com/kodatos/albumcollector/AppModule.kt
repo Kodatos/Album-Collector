@@ -11,18 +11,20 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Provides
+    @Singleton
     fun providesSqlDriver(@ApplicationContext context: Context): SqlDriver {
         return AndroidSqliteDriver(Database.Schema, context, Constants.DB_NAME)
     }
 
     @Provides
+    @Singleton
     fun providesDatabase(sqlDriver: SqlDriver): Database {
         return Database(sqlDriver)
     }

@@ -5,12 +5,14 @@ import androidx.core.view.updateLayoutParams
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.databinding.HeaderItemBinding
 
-fun headerItem(text: String, marginBottom: Int = 0) = RecyclerViewItem(
+fun headerItem(text: String, marginBottom: Int = 0, marginTop: Int = 0, marginStart: Int = 0) = RecyclerViewItem(
     layoutID = R.layout.header_item,
     getBinding = HeaderItemBinding::bind
 ) {
     header.text = text
     header.updateLayoutParams<ViewGroup.MarginLayoutParams> {
         bottomMargin = marginBottom
+        topMargin = marginTop
+        this.marginStart = marginStart
     }
 }

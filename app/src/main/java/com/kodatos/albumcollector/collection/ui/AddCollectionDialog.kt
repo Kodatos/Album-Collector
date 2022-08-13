@@ -6,10 +6,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.viewmodel.AddCollectionViewModel
 import com.kodatos.albumcollector.core.coroutines.collectWithLifecycle
-import com.kodatos.albumcollector.core.ui.BaseBottomSheetDialog
-import com.kodatos.albumcollector.core.ui.textString
+import com.kodatos.albumcollector.core.ui.*
 import com.kodatos.albumcollector.databinding.FragmentAddCollectionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,9 +26,21 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
         with(binding) {
-            refreshImage.setOnClickListener {
-                imageUrl.text?.let { url ->
-                    img.load(url)
+            imgEl.setEndIconOnClickListener {
+                imageUrl.textString?.let { url ->
+                    img.load(url) {
+                        error(R.drawable.ic_album)
+                        placeholder(R.drawable.ic_album)
+                        listener(
+                            onError = { _, _ ->
+                                val colors = context.dynamicColors
+                                img.setTint(colors.secondary)
+                            },
+                            onSuccess = { _, _ ->
+                                img.imageTintList = null
+                            }
+                        )
+                    }
                 }
             }
             name.addTextChangedListener {
@@ -44,6 +56,7 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
             save.setOnClickListener {
                 lifecycleScope.launch {
                     viewModel.saveCollection(name.textString!!, imageUrl.textString!!)
+                    dismiss()
                 }
             }
         }

@@ -2,6 +2,11 @@ package com.kodatos.albumcollector.collection.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kodatos.albumcollector.R
@@ -15,6 +20,7 @@ import com.kodatos.albumcollector.core.adapter.createSection
 import com.kodatos.albumcollector.core.ui.dp
 import com.kodatos.albumcollector.databinding.FragmentAllCollectionsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
@@ -27,12 +33,21 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
     ): FragmentAllCollectionsBinding  = FragmentAllCollectionsBinding.inflate(layoutInflater)
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, wi ->
+            val insets = wi.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.list.updatePadding(bottom = insets.bottom)
+            binding.add.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = (insets.bottom + resources.getDimension(R.dimen.fab_margin)).roundToInt()
+            }
+            WindowInsetsCompat.CONSUMED
+        }
         binding.list.setAdapter {
-            add(headerItem(getString(R.string.collections_header), 16.dp))
-            viewModel.collections.createSection(viewLifecycleOwner) {
+            spanCount = 2
+            add(headerItem(getString(R.string.collections_header), 8.dp, 16.dp, 16.dp))
+            add(viewModel.collections.createSection(viewLifecycleOwner) {
                 when (it) {
                     is AllCollectionsState.CollectionsList -> {
-                        it.map { model ->
+                        it.list.map { model ->
                             collectionItem(model) {
 
                             }
@@ -41,7 +56,7 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
                     AllCollectionsState.Empty -> listOf()
                     AllCollectionsState.Loading -> listOf(listLoaderItem())
                 }
-            }
+            })
         }
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.add_collection)

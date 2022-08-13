@@ -37,7 +37,6 @@ sealed interface AllCollectionsState {
     object Empty : AllCollectionsState
 
     @JvmInline
-    value class CollectionsList(val list: List<CollectionModel>) : AllCollectionsState,
-        List<CollectionModel> by list
+    value class CollectionsList(val list: List<CollectionModel>) : AllCollectionsState
 
 }

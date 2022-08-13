@@ -1,7 +1,12 @@
 package com.kodatos.albumcollector
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.navigation.fragment.NavHostFragment
 import com.kodatos.albumcollector.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,8 +18,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        binding = ActivityMainBinding.inflate( layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, wi ->
+            val insets = wi.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = insets.top
+            }
+
+            wi
+        }
         setupNav()
     }
 

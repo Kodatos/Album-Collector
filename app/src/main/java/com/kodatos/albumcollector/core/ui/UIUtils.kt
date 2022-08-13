@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.R
@@ -41,6 +42,10 @@ val Context.dynamicColors: AppDynamicColors
 fun MaterialButton.setTint(@ColorInt color: Int){
     setTextColor(color)
     iconTint = ColorStateList.valueOf(color)
+}
+
+fun ImageView.setTint(@ColorInt color: Int){
+    imageTintList = ColorStateList.valueOf(color)
 }
 
 val Int.dp: Int

@@ -15,6 +15,7 @@ import com.kodatos.albumcollector.databinding.CollectionItemBinding
 fun collectionItem(collectionModel: CollectionModel, listener: CollectionItemListener) =
     DiffRecyclerViewItem(
         R.layout.collection_item,
+        spanCount = 2,
         itemID = collectionModel.id,
         getBinding = CollectionItemBinding::bind,
     ) {

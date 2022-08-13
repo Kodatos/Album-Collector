@@ -26,6 +26,6 @@ class AddCollectionViewModel @Inject constructor(
     }
 
     fun onTextUpdated(name: String?, imageUrl: String?) {
-        _enableSave.value = name.isNullOrBlank() && imageUrl.isNullOrBlank()
+        _enableSave.value = !name.isNullOrBlank() && !imageUrl.isNullOrBlank()
     }
 }
