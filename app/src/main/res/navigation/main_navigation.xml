@@ -7,16 +7,21 @@
     <fragment
         android:id="@+id/allCollectionsScreen"
         android:name="com.kodatos.albumcollector.collection.ui.AllCollectionsScreen"
-        android:label="AllCollectionsScreen" >
+        android:label="AllCollectionsScreen">
         <action
             android:id="@+id/add_collection"
             app:destination="@id/addCollectionDialog"
+            app:restoreState="true"
             />
     </fragment>
 
     <dialog
         android:id="@+id/addCollectionDialog"
         android:name="com.kodatos.albumcollector.collection.ui.AddCollectionDialog"
-        android:label="AddCollectionDialog"
-        />
+        android:label="AddCollectionDialog">
+        <argument
+            android:name="action"
+            app:argType="com.kodatos.albumcollector.collection.models.AddCollectionAction"
+            />
+    </dialog>
 </navigation>

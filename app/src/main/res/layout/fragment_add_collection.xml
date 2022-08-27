@@ -34,11 +34,32 @@
         android:background="?attr/colorSurfaceVariant"
         android:scaleType="fitXY"
         android:src="@drawable/ic_album"
-        app:contentPadding="16dp"
+        app:contentPadding="@dimen/placeholder_padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider"
-        app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+        app:shapeAppearance="?attr/shapeAppearanceCornerSmall"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.BottomSheet.Image"
         app:tint="?attr/colorSecondary" />
+
+    <FrameLayout
+        android:id="@+id/imgLoader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="?attr/colorSecondaryContainer"
+        app:layout_constraintStart_toStartOf="@id/img"
+        app:layout_constraintEnd_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="@id/img"
+        app:layout_constraintBottom_toBottomOf="@id/img">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:indeterminateTint="?attr/colorOnSecondaryContainer"/>
+
+    </FrameLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_el"

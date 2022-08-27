@@ -4,6 +4,7 @@
     <string name="delete_edit">DELETE</string>
     <string name="collections_header">Your Collections </string>
     <string name="add_collections_header">New Collection</string>
+    <string name="edit_collections_header">Edit Collection</string>
     <string name="collection_name_label">Name</string>
     <string name="collection_image_label">Image URL</string>
     <string name="save_collection">Save</string>

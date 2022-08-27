@@ -7,6 +7,10 @@ CREATE TABLE Collections (
 selectAll:
 SELECT * FROM Collections;
 
+selectById:
+SELECT * FROM Collections
+WHERE id = ?;
+
 insertCollection:
 INSERT INTO Collections(name, imageUrl)
 VALUES (?, ?);

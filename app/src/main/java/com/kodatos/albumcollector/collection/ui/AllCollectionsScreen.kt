@@ -10,6 +10,8 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kodatos.albumcollector.R
+import com.kodatos.albumcollector.collection.models.AddCollectionAction
+import com.kodatos.albumcollector.collection.models.CollectionModel
 import com.kodatos.albumcollector.collection.viewmodel.AllCollectionsState
 import com.kodatos.albumcollector.collection.viewmodel.AllCollectionsViewmodel
 import com.kodatos.albumcollector.core.adapter.headerItem
@@ -30,14 +32,15 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
     override fun onInflateBinding(
         layoutInflater: LayoutInflater,
         savedInstanceState: Bundle?
-    ): FragmentAllCollectionsBinding  = FragmentAllCollectionsBinding.inflate(layoutInflater)
+    ): FragmentAllCollectionsBinding = FragmentAllCollectionsBinding.inflate(layoutInflater)
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, wi ->
             val insets = wi.getInsets(WindowInsetsCompat.Type.systemBars())
             binding.list.updatePadding(bottom = insets.bottom)
             binding.add.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = (insets.bottom + resources.getDimension(R.dimen.fab_margin)).roundToInt()
+                bottomMargin =
+                    (insets.bottom + resources.getDimension(R.dimen.fab_margin)).roundToInt()
             }
             WindowInsetsCompat.CONSUMED
         }
@@ -47,11 +50,7 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
             add(viewModel.collections.createSection(viewLifecycleOwner) {
                 when (it) {
                     is AllCollectionsState.CollectionsList -> {
-                        it.list.map { model ->
-                            collectionItem(model) {
-
-                            }
-                        }
+                        it.list.map(::collectionItem)
                     }
                     AllCollectionsState.Empty -> listOf()
                     AllCollectionsState.Loading -> listOf(listLoaderItem())
@@ -59,7 +58,25 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
             })
         }
         binding.add.setOnClickListener {
-            findNavController().navigate(R.id.add_collection)
+            findNavController().navigate(
+                AllCollectionsScreenDirections.addCollection(
+                    AddCollectionAction.New
+                )
+            )
+        }
+    }
+
+    private fun collectionItem(model: CollectionModel) = collectionItem(model) { action ->
+        when (action) {
+            CollectionItemListener.Delete -> {}
+            CollectionItemListener.Edit -> {
+                findNavController().navigate(
+                    AllCollectionsScreenDirections.addCollection(
+                        AddCollectionAction.Edit(model.id)
+                    )
+                )
+            }
+            CollectionItemListener.View -> {}
         }
     }
 

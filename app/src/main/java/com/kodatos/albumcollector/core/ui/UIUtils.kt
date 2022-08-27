@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.R
 import com.google.android.material.button.MaterialButton

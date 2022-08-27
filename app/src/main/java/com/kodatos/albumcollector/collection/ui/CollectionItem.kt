@@ -37,6 +37,7 @@ fun collectionItem(collectionModel: CollectionModel, listener: CollectionItemLis
         editLayout.setOnClickListener { editLayout.isVisible = false }
         edit.setOnClickListener { listener.onAction(CollectionItemListener.Edit) }
         edit.setTint(dynamicColors.onPrimaryContainer)
+        close.setTint(dynamicColors.onPrimaryContainer)
         delete.setOnClickListener { listener.onAction(CollectionItemListener.Delete) }
         delete.setTint(dynamicColors.onPrimaryContainer)
     }
@@ -50,4 +51,4 @@ fun interface CollectionItemListener {
     object View : Action
 }
 
-private const val BG_ALPHA = 144
+private const val BG_ALPHA = 198

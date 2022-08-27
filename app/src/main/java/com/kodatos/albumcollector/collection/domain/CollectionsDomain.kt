@@ -10,6 +10,8 @@ interface CollectionsDomain {
 
     fun getAllCollections(): Flow<List<CollectionModel>>
 
+    fun getCollectionforId(id: Long): CollectionModel?
+
     suspend fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>>
 
     suspend fun addCollection(collectionModel: CollectionModel)
@@ -19,5 +21,7 @@ interface CollectionsDomain {
     suspend fun addAlbumToCollection(collectionModel: CollectionModel, albumID: Long)
 
     suspend fun deleteAlbumFromCollection(collectionModel: CollectionModel, albumID: Long)
+
+    suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel)
 
 }

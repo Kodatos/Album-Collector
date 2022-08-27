@@ -17,6 +17,10 @@ class CollectionsDomainImpl @Inject constructor(
         return database.collectionQueries.selectAll(::mapToCollectionModel).asFlow().mapToList()
     }
 
+    override fun getCollectionforId(id: Long): CollectionModel? {
+        return database.collectionQueries.selectById(id, ::mapToCollectionModel).executeAsOneOrNull()
+    }
+
     override suspend fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>> {
         return database.collections_AlbumsQueries.getAlbumsForCollection(id, ::mapToAlbumModel).asFlow().mapToList()
     }
@@ -46,6 +50,12 @@ class CollectionsDomainImpl @Inject constructor(
         albumID: Long
     ) {
         database.collections_AlbumsQueries.deletePair(collectionModel.id, albumID)
+    }
+
+    override suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel) {
+        database.transaction {
+            database.collectionQueries.updateCollection(newCollectionModel.name, newCollectionModel.imageURL, id)
+        }
     }
 
     private fun mapToCollectionModel(
