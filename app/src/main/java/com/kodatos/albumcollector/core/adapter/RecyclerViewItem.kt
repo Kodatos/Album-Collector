@@ -8,7 +8,7 @@ open class RecyclerViewItem<T : ViewBinding>(
     private val layoutID: Int,
     private val spanCount: Int = 1,
     private val getBinding: (view: View) -> T,
-    private val bindItem: T.(position: Int) -> Unit
+    private val bindItem: T.(position: Int) -> Unit = {}
 ) : BindableItem<T>() {
 
     override fun initializeViewBinding(view: View): T = getBinding(view)
@@ -39,4 +39,5 @@ open class DiffRecyclerViewItem<T : ViewBinding>(
     }
 }
 
-
+fun <T: ViewBinding> RecyclerViewItem<T>.fullSizeItem() = listOf(this)
+fun emptyRecyclerView(): List<RecyclerViewItem<*>> = emptyList()

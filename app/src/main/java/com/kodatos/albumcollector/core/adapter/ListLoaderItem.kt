@@ -6,4 +6,4 @@ import com.kodatos.albumcollector.databinding.ListLoaderItemBinding
 fun listLoaderItem() = RecyclerViewItem(
     layoutID = R.layout.list_loader_item,
     getBinding = ListLoaderItemBinding::bind
-) {}
+).fullSizeItem()

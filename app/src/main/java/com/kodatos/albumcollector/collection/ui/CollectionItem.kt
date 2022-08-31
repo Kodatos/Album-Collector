@@ -35,10 +35,16 @@ fun collectionItem(collectionModel: CollectionModel, listener: CollectionItemLis
             true
         }
         editLayout.setOnClickListener { editLayout.isVisible = false }
-        edit.setOnClickListener { listener.onAction(CollectionItemListener.Edit) }
+        edit.setOnClickListener {
+            listener.onAction(CollectionItemListener.Edit)
+            editLayout.isVisible = false
+        }
         edit.setTint(dynamicColors.onPrimaryContainer)
         close.setTint(dynamicColors.onPrimaryContainer)
-        delete.setOnClickListener { listener.onAction(CollectionItemListener.Delete) }
+        delete.setOnClickListener {
+            listener.onAction(CollectionItemListener.Delete)
+            editLayout.isVisible = false
+        }
         delete.setTint(dynamicColors.onPrimaryContainer)
     }
 

@@ -13,11 +13,3 @@ fun RecyclerView.setAdapter(config: GroupieAdapter.() -> Unit) {
     layoutManager = lm
     setAdapter(adapter)
 }
-
-fun GroupieAdapter.item(item: RecyclerViewItem<*>) {
-    add(item)
-}
-
-fun GroupieAdapter.section(section: Section) {
-    add(section)
-}

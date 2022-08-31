@@ -6,6 +6,7 @@ import com.kodatos.albumcollector.collection.domain.CollectionsDomain
 import com.kodatos.albumcollector.collection.models.CollectionModel
 import com.kodatos.albumcollector.core.coroutines.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -22,12 +23,18 @@ class AllCollectionsViewmodel @Inject constructor(
         get() = _collections
 
     init {
-        viewModelScope.launch(dispatcherProvider.DEFAULT) {
+        viewModelScope.launch(dispatcherProvider.IO) {
             collectionsDomain.getAllCollections().collect {
                 _collections.value = if (it.isEmpty())
                     AllCollectionsState.Empty
                 else AllCollectionsState.CollectionsList(it)
             }
+        }
+    }
+
+    fun deleteCollection(collectionModel: CollectionModel) {
+        viewModelScope.launch(dispatcherProvider.IO) {
+            collectionsDomain.deleteCollection(collectionModel)
         }
     }
 }

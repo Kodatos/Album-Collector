@@ -13,15 +13,26 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            >
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/appBar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                style="?attr/collapsingToolbarLayoutLargeStyle"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:titleTextAppearance="?attr/textAppearanceHeadlineLarge"
-                app:title="@string/app_name"
-                app:titleCentered="true" />
+                android:elevation="0dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:title="@string/app_name"
+                    android:background="@android:color/transparent"
+                    app:layout_collapseMode="pin"
+                    android:elevation="0dp" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
