@@ -8,4 +8,5 @@
     <string name="collection_name_label">Name</string>
     <string name="collection_image_label">Image URL</string>
     <string name="save_collection">Save</string>
+    <string name="collection_header_desc">Albums</string>
 </resources>

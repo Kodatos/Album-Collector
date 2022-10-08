@@ -6,9 +6,9 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 open class RecyclerViewItem<T : ViewBinding>(
     private val layoutID: Int,
-    private val spanCount: Int = 1,
+    protected val spanCount: Int = 1,
     private val getBinding: (view: View) -> T,
-    private val bindItem: T.(position: Int) -> Unit = {}
+    protected val bindItem: T.(position: Int) -> Unit = {}
 ) : BindableItem<T>() {
 
     override fun initializeViewBinding(view: View): T = getBinding(view)
@@ -31,7 +31,7 @@ open class DiffRecyclerViewItem<T : ViewBinding>(
     spanCount: Int = 1,
     private val itemID: Long,
     getBinding: (view: View) -> T,
-    bindItem: T.(position: Int) -> Unit,
+    bindItem: T.(position: Int) -> Unit = {},
 ) : RecyclerViewItem<T>(layoutID, spanCount, getBinding = getBinding, bindItem = bindItem) {
 
     override fun getId(): Long {

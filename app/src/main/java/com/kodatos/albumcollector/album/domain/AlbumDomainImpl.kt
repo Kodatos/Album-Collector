@@ -26,15 +26,23 @@ class AlbumDomainImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteAlbum(albumModel: AlbumModel) {
+    override suspend fun deleteAlbum(albumID: Long) {
         database.transaction {
-            database.collections_AlbumsQueries.deleteAlbum(albumModel.id)
-            database.albumQueries.deleteAlbum(albumModel.id)
+            database.collections_AlbumsQueries.deleteAlbum(albumID)
+            database.albumQueries.deleteAlbum(albumID)
         }
     }
 
     override suspend fun searchAlbumsByName(name: String): List<AlbumSearchModel> {
         return database.albumQueries.selectAlbumsByName(name, ::mapToSearchModel).executeAsList()
+    }
+
+    override suspend fun getAlbumByID(id: Long): AlbumModel? {
+        return database.albumQueries.selectAlbumById(id, ::mapToAlbumModel).executeAsOneOrNull()
+    }
+
+    override suspend fun updateAlbum(id: Long, newAlbum: AlbumModel) {
+        database.albumQueries.updateAlbum(newAlbum.title, newAlbum.artist, newAlbum.deepLink, newAlbum.imageURL, id)
     }
 
     private fun mapToAlbumModel(

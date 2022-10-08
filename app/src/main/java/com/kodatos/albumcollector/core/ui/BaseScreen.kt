@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -15,6 +18,7 @@ abstract class BaseScreen<T: ViewBinding>: Fragment() {
 
     abstract fun onInflateBinding(layoutInflater: LayoutInflater, savedInstanceState: Bundle?): T
     abstract fun onBindingInflated(savedInstanceState: Bundle?)
+    open fun applySystemBarInsets(insets: Insets) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +30,11 @@ abstract class BaseScreen<T: ViewBinding>: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, wi ->
+            val insets = wi.getInsets(WindowInsetsCompat.Type.systemBars())
+            applySystemBarInsets(insets)
+            WindowInsetsCompat.CONSUMED
+        }
         onBindingInflated(savedInstanceState)
     }
 }

@@ -11,6 +11,7 @@ import com.kodatos.albumcollector.core.coroutines.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -71,6 +72,6 @@ class AddCollectionViewModel @Inject constructor(
     }
 
     fun onTextUpdated(name: String?, imageUrl: String?) {
-        _enableSave.value = !name.isNullOrBlank() && !imageUrl.isNullOrBlank()
+        _enableSave.update { !name.isNullOrBlank() && !imageUrl.isNullOrBlank() }
     }
 }

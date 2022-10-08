@@ -13,7 +13,11 @@ interface AlbumDomain {
      */
     suspend fun addAlbum(albumModel: AlbumModel): AlbumModel
 
-    suspend fun deleteAlbum(albumModel: AlbumModel)
+    suspend fun deleteAlbum(albumID: Long)
 
     suspend fun searchAlbumsByName(name: String): List<AlbumSearchModel>
+
+    suspend fun getAlbumByID(id: Long): AlbumModel?
+
+    suspend fun updateAlbum(id: Long, newAlbum: AlbumModel)
 }

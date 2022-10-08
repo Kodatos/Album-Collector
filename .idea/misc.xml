@@ -10,11 +10,14 @@
         <entry key="..\:/AlbumCollector/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1595" />
         <entry key="..\:/AlbumCollector/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1595" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/activity_main.xml" value="0.30434782608695654" />
+        <entry key="..\:/AlbumCollector/app/src/main/res/layout/album_item.xml" value="0.2975630611372381" />
+        <entry key="..\:/AlbumCollector/app/src/main/res/layout/collection_header_item.xml" value="0.2975630611372381" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/collection_item.xml" value="0.25" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/fragment_add_collection.xml" value="0.33" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/fragment_all_collections.xml" value="0.22" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/header_item.xml" value="0.2028985507246377" />
         <entry key="..\:/AlbumCollector/app/src/main/res/layout/list_loader_item.xml" value="0.33" />
+        <entry key="..\:/AlbumCollector/app/src/main/res/layout/screen_view_collection.xml" value="0.15220179563916203" />
         <entry key="..\:/AlbumCollector/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1595" />
         <entry key="..\:/AlbumCollector/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1595" />
         <entry key="..\:/AlbumCollector/app/src/main/res/mipmap-anydpi/ic_launcher.xml" value="0.1595" />

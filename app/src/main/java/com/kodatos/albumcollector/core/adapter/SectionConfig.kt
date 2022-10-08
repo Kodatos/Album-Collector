@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 
 fun section(config: Section.() -> Unit) = Section().apply(config)
 
-fun <T> Flow<T>.createSection(
+fun <T> Flow<T>.createAdapterSection(
     lifecycleOwner: LifecycleOwner,
     safeCollect: Boolean = true,
-    getItems: (data: T) -> List<RecyclerViewItem<*>>,
-) = section {
+    getItems: (data: T) -> Collection<RecyclerViewItem<*>>,
+): Section = section {
     if (safeCollect) {
         lifecycleOwner.lifecycleScope.launch {
             flowWithLifecycle(lifecycleOwner.lifecycle).collectLatest {

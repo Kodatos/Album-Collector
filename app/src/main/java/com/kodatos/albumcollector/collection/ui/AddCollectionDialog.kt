@@ -13,10 +13,7 @@ import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.viewmodel.AddCollectionViewModel
 import com.kodatos.albumcollector.core.coroutines.collectLatestLifecycle
-import com.kodatos.albumcollector.core.ui.BaseBottomSheetDialog
-import com.kodatos.albumcollector.core.ui.dynamicColors
-import com.kodatos.albumcollector.core.ui.setTint
-import com.kodatos.albumcollector.core.ui.textString
+import com.kodatos.albumcollector.core.ui.*
 import com.kodatos.albumcollector.databinding.FragmentAddCollectionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNot
@@ -81,23 +78,13 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
     private fun loadUrl(url: String) {
         with(binding.img) {
             binding.imgLoader.isVisible = true
-            load(url) {
-                error(R.drawable.ic_album)
-                placeholder(R.drawable.ic_album)
-                listener(
-                    onError = { _, _ ->
-                        binding.imgLoader.isVisible = false
-                        val colors = context.dynamicColors
-                        setTint(colors.secondary)
-                        val padding = resources.getDimension(R.dimen.placeholder_padding).toInt()
-                        setContentPadding(padding, padding, padding, padding)
-                    },
-                    onSuccess = { _, _ ->
-                        binding.imgLoader.isVisible = false
-                        setContentPadding(0, 0, 0, 0)
-                        imageTintList = null
-                    }
-                )
+            loadUrlOrTintPlaceholder(
+                url,
+                R.drawable.ic_album,
+                context.dynamicColors.secondary,
+                context.resources.getDimension(R.dimen.placeholder_padding).toInt(),
+            ) {
+                binding.imgLoader.isVisible = false
             }
         }
     }

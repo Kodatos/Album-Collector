@@ -1,4 +1,4 @@
-package com.kodatos.albumcollector.collection.ui
+package com.kodatos.albumcollector.collection.adapter
 
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
@@ -6,7 +6,6 @@ import coil.load
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.models.CollectionModel
 import com.kodatos.albumcollector.core.adapter.DiffRecyclerViewItem
-import com.kodatos.albumcollector.core.adapter.RecyclerViewItem
 import com.kodatos.albumcollector.core.ui.context
 import com.kodatos.albumcollector.core.ui.dynamicColors
 import com.kodatos.albumcollector.core.ui.setTint
