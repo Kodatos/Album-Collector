@@ -8,19 +8,18 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.viewmodel.AddCollectionViewModel
 import com.kodatos.albumcollector.core.coroutines.collectLatestLifecycle
 import com.kodatos.albumcollector.core.ui.*
-import com.kodatos.albumcollector.databinding.FragmentAddCollectionBinding
+import com.kodatos.albumcollector.databinding.ScreenAddCollectionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>() {
+class AddCollectionDialog : BaseBottomSheetDialog<ScreenAddCollectionBinding>() {
 
     private val viewModel: AddCollectionViewModel by viewModels()
     private val args: AddCollectionDialogArgs by navArgs()
@@ -28,7 +27,7 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
     override fun onInflateBinding(
         layoutInflater: LayoutInflater,
         savedInstanceState: Bundle?
-    ) = FragmentAddCollectionBinding.inflate(layoutInflater)
+    ) = ScreenAddCollectionBinding.inflate(layoutInflater)
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
         with(binding) {
@@ -51,9 +50,7 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
                 }
             )
             imgEl.setEndIconOnClickListener {
-                imageUrl.textString?.let { url ->
-                    loadUrl(url)
-                }
+                loadUrl(imageUrl.textString)
             }
             name.addTextChangedListener {
                 viewModel.onTextUpdated(name.textString, imageUrl.textString)
@@ -68,7 +65,7 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
 
             save.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.saveCollection(name.textString!!, imageUrl.textString!!)
+                    viewModel.saveCollection(name.textString, imageUrl.textString)
                     dismiss()
                 }
             }
@@ -88,5 +85,4 @@ class AddCollectionDialog : BaseBottomSheetDialog<FragmentAddCollectionBinding>(
             }
         }
     }
-
 }

@@ -22,7 +22,7 @@ open class RecyclerViewItem<T : ViewBinding>(
     }
 
     override fun getSpanSize(sc: Int, position: Int): Int {
-        return sc/spanCount.coerceAtLeast(1)
+        return sc / spanCount.coerceAtLeast(1)
     }
 }
 
@@ -39,5 +39,5 @@ open class DiffRecyclerViewItem<T : ViewBinding>(
     }
 }
 
-fun <T: ViewBinding> RecyclerViewItem<T>.fullSizeItem() = listOf(this)
+fun <T : ViewBinding> RecyclerViewItem<T>.fullSizeItem() = listOf(this)
 fun emptyRecyclerView(): List<RecyclerViewItem<*>> = emptyList()

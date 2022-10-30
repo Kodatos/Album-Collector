@@ -9,4 +9,6 @@
     <string name="collection_image_label">Image URL</string>
     <string name="save_collection">Save</string>
     <string name="collection_header_desc">Albums</string>
+    <string name="collection_details_error">Couldn\'t retrieve your collection</string>
+    <string name="empty_collection_desc">No albums in your collection, start by adding one!</string>
 </resources>

@@ -2,8 +2,6 @@ package com.kodatos.albumcollector.collection.domain
 
 import com.kodatos.albumcollector.album.models.AlbumModel
 import com.kodatos.albumcollector.collection.models.CollectionModel
-import comkodatosalbumcollector.Collections
-import comkodatosalbumcollector.GetAlbumsForCollection
 import kotlinx.coroutines.flow.Flow
 
 interface CollectionsDomain {
@@ -12,7 +10,7 @@ interface CollectionsDomain {
 
     fun getCollectionforId(id: Long): CollectionModel?
 
-    suspend fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>>
+    fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>>
 
     suspend fun addCollection(collectionModel: CollectionModel)
 
@@ -23,5 +21,4 @@ interface CollectionsDomain {
     suspend fun deleteAlbumFromCollection(collectionModel: CollectionModel, albumID: Long)
 
     suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel)
-
 }

@@ -3,22 +3,24 @@ package com.kodatos.albumcollector.collection.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kodatos.albumcollector.AppModule
 import com.kodatos.albumcollector.collection.domain.CollectionsDomain
 import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.models.CollectionModel
 import com.kodatos.albumcollector.collection.ui.AddCollectionDialogArgs
-import com.kodatos.albumcollector.core.coroutines.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class AddCollectionViewModel @Inject constructor(
     private val collectionsDomain: CollectionsDomain,
-    private val dispatcherProvider: DispatcherProvider,
+    @Named(AppModule.DEFAULT_DISPATCHER) private val defaultDispatcher: CoroutineDispatcher,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -34,13 +36,12 @@ class AddCollectionViewModel @Inject constructor(
         get() = _initialImage
 
     init {
-        val action = AddCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action
-        when (action) {
+        when (val action = AddCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action) {
             is AddCollectionAction.Edit -> {
-                viewModelScope.launch(dispatcherProvider.DEFAULT) {
+                viewModelScope.launch(defaultDispatcher) {
                     collectionsDomain.getCollectionforId(action.id)?.let {
                         _initialName.value = it.name
-                        _initialImage.value = it.imageURL ?: ""
+                        _initialImage.value = it.imageURL.orEmpty()
                         _enableSave.value = true
                     }
                 }
@@ -67,7 +68,6 @@ class AddCollectionViewModel @Inject constructor(
                     imageUrl
                 )
             )
-
         }
     }
 

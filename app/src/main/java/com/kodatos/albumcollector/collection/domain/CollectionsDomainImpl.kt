@@ -18,11 +18,13 @@ class CollectionsDomainImpl @Inject constructor(
     }
 
     override fun getCollectionforId(id: Long): CollectionModel? {
-        return database.collectionQueries.selectById(id, ::mapToCollectionModel).executeAsOneOrNull()
+        return database.collectionQueries.selectById(id, ::mapToCollectionModel)
+            .executeAsOneOrNull()
     }
 
-    override suspend fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>> {
-        return database.collections_AlbumsQueries.getAlbumsForCollection(id, ::mapToAlbumModel).asFlow().mapToList()
+    override fun getAlbumsForCollection(id: Long): Flow<List<AlbumModel>> {
+        return database.collections_AlbumsQueries.getAlbumsForCollection(id, ::mapToAlbumModel)
+            .asFlow().mapToList()
     }
 
     override suspend fun addCollection(collectionModel: CollectionModel) {
@@ -37,9 +39,7 @@ class CollectionsDomainImpl @Inject constructor(
     }
 
     override suspend fun addAlbumToCollection(collectionModel: CollectionModel, albumID: Long) {
-        if (collectionModel.id == -1L || albumID == -1L) {
-            throw IllegalArgumentException("ID shouldn't be -1")
-        }
+        require(collectionModel.id == -1L || albumID == -1L)
         database.collections_AlbumsQueries.insertPair(
             Collections_Albums(collectionModel.id, albumID)
         )
@@ -54,7 +54,11 @@ class CollectionsDomainImpl @Inject constructor(
 
     override suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel) {
         database.transaction {
-            database.collectionQueries.updateCollection(newCollectionModel.name, newCollectionModel.imageURL, id)
+            database.collectionQueries.updateCollection(
+                newCollectionModel.name,
+                newCollectionModel.imageURL,
+                id
+            )
         }
     }
 
@@ -71,5 +75,4 @@ class CollectionsDomainImpl @Inject constructor(
         imageUrl: String?,
         link: String?
     ) = AlbumModel(title, artist, imageUrl, link, id)
-
 }

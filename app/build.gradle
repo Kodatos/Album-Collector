@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.kodatos.albumcollector"
         minSdk 28
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -39,12 +39,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    sqldelight {
+        Database {
+            packageName = "com.kodatos.albumcollector"
+        }
+    }
+    namespace 'com.kodatos.albumcollector'
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation "com.google.android.material:material:$material_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -66,10 +73,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
-detekt {
-    buildUponDefaultConfig = true // preconfigure defaults
-    allRules = false // activate all available (even unstable) rules.
-    config = files("$projectDir/config/detekt.yml")
-    // point to your custom config defining rules to run, overwriting default behavior
-}
 

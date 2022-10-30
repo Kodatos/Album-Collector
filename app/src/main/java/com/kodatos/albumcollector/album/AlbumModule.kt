@@ -7,11 +7,10 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AlbumModule {
+interface AlbumModule {
 
     @Binds
-    abstract fun bindsAlbumDomain(albumDomainImpl: AlbumDomainImpl): AlbumDomain
+    fun bindsAlbumDomain(albumDomainImpl: AlbumDomainImpl): AlbumDomain
 }

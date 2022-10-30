@@ -13,38 +13,39 @@ import com.kodatos.albumcollector.collection.adapter.CollectionItemListener
 import com.kodatos.albumcollector.collection.adapter.collectionItem
 import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.models.CollectionModel
-import com.kodatos.albumcollector.collection.viewmodel.AllCollectionsState
+import com.kodatos.albumcollector.collection.state.AllCollectionsState
 import com.kodatos.albumcollector.collection.viewmodel.AllCollectionsViewmodel
 import com.kodatos.albumcollector.core.adapter.*
 import com.kodatos.albumcollector.core.ui.BaseScreen
-import com.kodatos.albumcollector.databinding.FragmentAllCollectionsBinding
+import com.kodatos.albumcollector.databinding.ScreenAllCollectionsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
+class AllCollectionsScreen : BaseScreen<ScreenAllCollectionsBinding>() {
 
     private val viewModel: AllCollectionsViewmodel by viewModels()
 
     override fun onInflateBinding(
         layoutInflater: LayoutInflater,
         savedInstanceState: Bundle?
-    ): FragmentAllCollectionsBinding = FragmentAllCollectionsBinding.inflate(layoutInflater)
+    ): ScreenAllCollectionsBinding = ScreenAllCollectionsBinding.inflate(layoutInflater)
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
         binding.list.setAdapter {
             spanCount = 2
 
-            add(viewModel.collections.createAdapterSection(viewLifecycleOwner) {
-                when (it) {
-                    is AllCollectionsState.CollectionsList -> {
-                        it.list.map(::collection)
+            add(
+                viewModel.collections.createAdapterSection(viewLifecycleOwner) {
+                    when (it) {
+                        is AllCollectionsState.CollectionsList -> {
+                            it.map(::collection)
+                        }
+                        AllCollectionsState.Empty -> emptyRecyclerView()
+                        AllCollectionsState.Loading -> listLoaderItem()
                     }
-                    AllCollectionsState.Empty -> emptyRecyclerView()
-                    AllCollectionsState.Loading -> listLoaderItem()
                 }
-            })
-
+            )
         }
         binding.add.setOnClickListener {
             findNavController().navigate(
@@ -67,7 +68,9 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
                     )
                 )
             }
-            CollectionItemListener.View -> {}
+            CollectionItemListener.View -> {
+                findNavController().navigate(AllCollectionsScreenDirections.viewCollection(model.id))
+            }
         }
     }
 
@@ -78,5 +81,4 @@ class AllCollectionsScreen : BaseScreen<FragmentAllCollectionsBinding>() {
                 (insets.bottom + resources.getDimension(R.dimen.fab_margin)).roundToInt()
         }
     }
-
 }

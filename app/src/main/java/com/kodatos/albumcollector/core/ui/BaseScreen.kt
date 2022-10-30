@@ -10,10 +10,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseScreen<T: ViewBinding>: Fragment() {
+abstract class BaseScreen<T : ViewBinding> : Fragment() {
 
     private var _binding: T? = null
     protected val binding: T
+        @SuppressWarnings("UnsafeCallOnNullableType")
         get() = _binding!!
 
     abstract fun onInflateBinding(layoutInflater: LayoutInflater, savedInstanceState: Bundle?): T

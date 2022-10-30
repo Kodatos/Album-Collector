@@ -1,6 +1,5 @@
 package com.kodatos.albumcollector.collection.adapter
 
-import android.widget.TextView
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.models.CollectionModel
 import com.kodatos.albumcollector.core.adapter.RecyclerViewItem

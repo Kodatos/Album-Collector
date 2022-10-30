@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:layout_gravity="center"
-            android:indeterminateTint="?attr/colorOnSecondaryContainer"/>
+            android:indeterminateTint="?attr/colorOnSecondaryContainer" />
 
     </FrameLayout>
 

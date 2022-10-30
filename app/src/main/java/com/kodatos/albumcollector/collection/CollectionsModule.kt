@@ -10,10 +10,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class CollectionsModule {
+interface CollectionsModule {
 
     @Binds
     @Singleton
-    abstract fun bindCollectionsDomain(collectionsDomainImpl: CollectionsDomainImpl): CollectionsDomain
-
+    fun bindCollectionsDomain(collectionsDomainImpl: CollectionsDomainImpl): CollectionsDomain
 }

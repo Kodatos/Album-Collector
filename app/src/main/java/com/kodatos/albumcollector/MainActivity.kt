@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         AppDynamicColors.getInstance(this)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        binding = ActivityMainBinding.inflate( layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, wi ->
@@ -35,12 +35,13 @@ class MainActivity : AppCompatActivity() {
         setupNav()
     }
 
-    private fun setupNav(){
+    private fun setupNav() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.screen_container) as NavHostFragment
         val navController = navHostFragment.navController
         navController.addOnDestinationChangedListener { _, destination, arguments ->
-
+            if(destination.id == R.id.collectionDetailsScreen){
+            }
         }
     }
 }

@@ -1,25 +1,30 @@
 package com.kodatos.albumcollector.core.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.annotation.ColorInt
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import com.google.android.material.R
-import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.scopes.ActivityScoped
-
 
 @SuppressWarnings("ResourceType", "MagicNumber")
 class AppDynamicColors private constructor(
-     context: Context,
+    context: Context,
 ) {
-    @ColorInt val primary: Int
-    @ColorInt val onPrimary: Int
-    @ColorInt val secondary: Int
-    @ColorInt val onSecondary: Int
-    @ColorInt val primaryContainer: Int
-    @ColorInt val onPrimaryContainer: Int
+    @ColorInt
+    val primary: Int
+
+    @ColorInt
+    val onPrimary: Int
+
+    @ColorInt
+    val secondary: Int
+
+    @ColorInt
+    val onSecondary: Int
+
+    @ColorInt
+    val primaryContainer: Int
+
+    @ColorInt
+    val onPrimaryContainer: Int
 
     init {
         val ta = context.obtainStyledAttributes(
@@ -39,7 +44,6 @@ class AppDynamicColors private constructor(
         primaryContainer = ta.getColor(4, 0)
         onPrimaryContainer = ta.getColor(5, 0)
         ta.recycle()
-
     }
 
     companion object {
@@ -48,7 +52,7 @@ class AppDynamicColors private constructor(
         private var INSTANCE: AppDynamicColors? = null
 
         fun getInstance(context: Context): AppDynamicColors = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: AppDynamicColors(context)
+            INSTANCE ?: AppDynamicColors(context).also { INSTANCE = it }
         }
     }
 }

@@ -42,7 +42,13 @@ class AlbumDomainImpl @Inject constructor(
     }
 
     override suspend fun updateAlbum(id: Long, newAlbum: AlbumModel) {
-        database.albumQueries.updateAlbum(newAlbum.title, newAlbum.artist, newAlbum.deepLink, newAlbum.imageURL, id)
+        database.albumQueries.updateAlbum(
+            newAlbum.title,
+            newAlbum.artist,
+            newAlbum.deepLink,
+            newAlbum.imageURL,
+            id
+        )
     }
 
     private fun mapToAlbumModel(

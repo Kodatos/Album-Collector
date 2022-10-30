@@ -62,7 +62,7 @@ private class AlbumItem(
     }
 }
 
-fun albumModel(
+fun albumItem(
     albumModel: AlbumModel,
     listener: AlbumItemListener
 ): DiffRecyclerViewItem<AlbumItemBinding> = AlbumItem(albumModel, listener)

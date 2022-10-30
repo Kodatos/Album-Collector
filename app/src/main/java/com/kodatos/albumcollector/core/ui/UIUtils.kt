@@ -2,7 +2,6 @@ package com.kodatos.albumcollector.core.ui
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Color
 import android.widget.EditText
 import android.widget.ImageView
@@ -28,11 +27,8 @@ fun ImageView.setTint(@ColorInt color: Int) {
     imageTintList = ColorStateList.valueOf(color)
 }
 
-val Int.dp: Int
-    get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-
-val EditText.textString: String?
-    get() = text?.toString()
+val EditText.textString: String
+    get() = text?.toString().orEmpty()
 
 fun ShapeableImageView.loadUrlOrTintPlaceholder(
     url: String?,
