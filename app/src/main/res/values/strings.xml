@@ -4,11 +4,16 @@
     <string name="delete_edit">DELETE</string>
     <string name="collections_header">Your Collections </string>
     <string name="add_collections_header">New Collection</string>
+    <string name="add_album_header">New Album</string>
     <string name="edit_collections_header">Edit Collection</string>
+    <string name="edit_album_header">Edit Album</string>
     <string name="collection_name_label">Name</string>
     <string name="collection_image_label">Image URL</string>
     <string name="save_collection">Save</string>
     <string name="collection_header_desc">Albums</string>
     <string name="collection_details_error">Couldn\'t retrieve your collection</string>
     <string name="empty_collection_desc">No albums in your collection, start by adding one!</string>
+    <string name="album_title_label">Title</string>
+    <string name="album_artist_label">Artist</string>
+    <string name="album_link_label">Link to Album</string>
 </resources>

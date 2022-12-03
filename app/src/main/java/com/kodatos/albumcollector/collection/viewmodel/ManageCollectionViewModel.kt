@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kodatos.albumcollector.AppModule
 import com.kodatos.albumcollector.collection.domain.CollectionsDomain
-import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.models.CollectionModel
-import com.kodatos.albumcollector.collection.ui.AddCollectionDialogArgs
+import com.kodatos.albumcollector.collection.models.ManageCollectionAction
+import com.kodatos.albumcollector.collection.ui.ManageCollectionDialogArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class AddCollectionViewModel @Inject constructor(
+class ManageCollectionViewModel @Inject constructor(
     private val collectionsDomain: CollectionsDomain,
     @Named(AppModule.DEFAULT_DISPATCHER) private val defaultDispatcher: CoroutineDispatcher,
     private val savedStateHandle: SavedStateHandle,
@@ -36,8 +36,11 @@ class AddCollectionViewModel @Inject constructor(
         get() = _initialImage
 
     init {
-        when (val action = AddCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action) {
-            is AddCollectionAction.Edit -> {
+        when (
+            val action =
+                ManageCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action
+        ) {
+            is ManageCollectionAction.Edit -> {
                 viewModelScope.launch(defaultDispatcher) {
                     collectionsDomain.getCollectionforId(action.id)?.let {
                         _initialName.value = it.name
@@ -46,15 +49,18 @@ class AddCollectionViewModel @Inject constructor(
                     }
                 }
             }
-            AddCollectionAction.New -> {
+            ManageCollectionAction.New -> {
                 _enableSave.value = false
             }
         }
     }
 
     suspend fun saveCollection(name: String, imageUrl: String) {
-        when (val action = AddCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action) {
-            is AddCollectionAction.Edit -> collectionsDomain.updateCollection(
+        when (
+            val action =
+                ManageCollectionDialogArgs.fromSavedStateHandle(savedStateHandle).action
+        ) {
+            is ManageCollectionAction.Edit -> collectionsDomain.updateCollection(
                 action.id,
                 CollectionModel(
                     name,
@@ -62,7 +68,7 @@ class AddCollectionViewModel @Inject constructor(
                 )
             )
 
-            AddCollectionAction.New -> collectionsDomain.addCollection(
+            ManageCollectionAction.New -> collectionsDomain.addCollection(
                 CollectionModel(
                     name,
                     imageUrl

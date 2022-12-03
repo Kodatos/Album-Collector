@@ -62,7 +62,7 @@
     </FrameLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name_el"
+        android:id="@+id/title_el"
         style="?attr/textInputOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,15 +70,39 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
-        android:hint="@string/collection_name_label"
-        app:layout_constraintBottom_toTopOf="@id/img_el"
+        android:hint="@string/album_title_label"
+        app:layout_constraintBottom_toTopOf="@id/artist_el"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img"
         app:layout_constraintTop_toTopOf="@id/img"
         app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/artist_el"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/album_artist_label"
+        app:layout_constraintBottom_toBottomOf="@id/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/title_el"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/artist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
@@ -91,22 +115,44 @@
         style="?attr/textInputOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:hint="@string/collection_image_label"
         app:endIconDrawable="@drawable/ic_image_apply"
         app:endIconMode="custom"
         app:endIconTint="?attr/colorPrimary"
         app:endIconContentDescription="Apply"
-        app:layout_constraintBottom_toBottomOf="@id/img"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/img"
-        app:layout_constraintTop_toBottomOf="@id/name_el"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textUri"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/link_el"
+        style="?attr/textInputOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/album_link_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_el"
         app:startIconDrawable="@drawable/ic_link">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/image_url"
+            android:id="@+id/link_url"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textUri"
@@ -126,6 +172,6 @@
         app:icon="@drawable/ic_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img" />
+        app:layout_constraintTop_toBottomOf="@id/link_el" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

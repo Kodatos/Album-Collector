@@ -11,7 +11,7 @@ import com.kodatos.albumcollector.core.ui.dynamicColors
 import com.kodatos.albumcollector.core.ui.loadUrlOrTintPlaceholder
 import com.kodatos.albumcollector.databinding.AlbumItemBinding
 
-private class AlbumItem(
+class AlbumItem(
     private val albumModel: AlbumModel,
     private val listener: AlbumItemListener
 ) : DiffRecyclerViewItem<AlbumItemBinding>(
@@ -65,7 +65,7 @@ private class AlbumItem(
 fun albumItem(
     albumModel: AlbumModel,
     listener: AlbumItemListener
-): DiffRecyclerViewItem<AlbumItemBinding> = AlbumItem(albumModel, listener)
+) = AlbumItem(albumModel, listener)
 
 fun interface AlbumItemListener {
     fun onAction(action: Action)

@@ -10,7 +10,7 @@
         android:label="AllCollectionsScreen">
         <action
             android:id="@+id/add_collection"
-            app:destination="@id/addCollectionDialog"
+            app:destination="@id/manageCollectionDialog"
             app:restoreState="true" />
         <action
             android:id="@+id/view_collection"
@@ -25,15 +25,30 @@
         <argument
             android:name="id"
             app:argType="long" />
+
+        <action
+            android:id="@+id/manage_album"
+            app:destination="@id/manageAlbumDialog"
+            app:restoreState="true" />
     </fragment>
 
     <dialog
-        android:id="@+id/addCollectionDialog"
-        android:name="com.kodatos.albumcollector.collection.ui.AddCollectionDialog"
-        android:label="AddCollectionDialog">
+        android:id="@+id/manageCollectionDialog"
+        android:name="com.kodatos.albumcollector.collection.ui.ManageCollectionDialog"
+        android:label="ManageCollectionDialog">
         <argument
             android:name="action"
-            app:argType="com.kodatos.albumcollector.collection.models.AddCollectionAction" />
+            app:argType="com.kodatos.albumcollector.collection.models.ManageCollectionAction" />
+    </dialog>
+
+
+    <dialog
+        android:id="@+id/manageAlbumDialog"
+        android:name="com.kodatos.albumcollector.album.ui.ManageAlbumDialog"
+        android:label="ManageAlbumDialog">
+        <argument
+            android:name="action"
+            app:argType="com.kodatos.albumcollector.album.models.ManageAlbumAction" />
     </dialog>
 
 </navigation>

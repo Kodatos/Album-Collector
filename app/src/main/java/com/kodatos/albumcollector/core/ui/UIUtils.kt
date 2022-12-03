@@ -30,6 +30,10 @@ fun ImageView.setTint(@ColorInt color: Int) {
 val EditText.textString: String
     get() = text?.toString().orEmpty()
 
+
+val EditText.textOrNull: String?
+    get() = text?.toString()?.ifBlank { null }
+
 fun ShapeableImageView.loadUrlOrTintPlaceholder(
     url: String?,
     @DrawableRes placeHolder: Int,

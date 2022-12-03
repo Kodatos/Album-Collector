@@ -16,9 +16,9 @@ interface CollectionsDomain {
 
     suspend fun deleteCollection(collectionModel: CollectionModel)
 
-    suspend fun addAlbumToCollection(collectionModel: CollectionModel, albumID: Long)
+    suspend fun addAlbumToCollection(collectionId: Long, albumID: Long)
 
-    suspend fun deleteAlbumFromCollection(collectionModel: CollectionModel, albumID: Long)
+    suspend fun deleteAlbumFromCollection(collectionId: Long, albumID: Long)
 
     suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel)
 }

@@ -38,18 +38,18 @@ class CollectionsDomainImpl @Inject constructor(
         }
     }
 
-    override suspend fun addAlbumToCollection(collectionModel: CollectionModel, albumID: Long) {
-        require(collectionModel.id == -1L || albumID == -1L)
+    override suspend fun addAlbumToCollection(collectionId: Long, albumID: Long) {
+        require(collectionId == -1L || albumID == -1L)
         database.collections_AlbumsQueries.insertPair(
-            Collections_Albums(collectionModel.id, albumID)
+            Collections_Albums(collectionId, albumID)
         )
     }
 
     override suspend fun deleteAlbumFromCollection(
-        collectionModel: CollectionModel,
+        collectionId: Long,
         albumID: Long
     ) {
-        database.collections_AlbumsQueries.deletePair(collectionModel.id, albumID)
+        database.collections_AlbumsQueries.deletePair(collectionId, albumID)
     }
 
     override suspend fun updateCollection(id: Long, newCollectionModel: CollectionModel) {

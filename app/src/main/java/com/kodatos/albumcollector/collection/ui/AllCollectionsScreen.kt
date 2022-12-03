@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.collection.adapter.CollectionItemListener
 import com.kodatos.albumcollector.collection.adapter.collectionItem
-import com.kodatos.albumcollector.collection.models.AddCollectionAction
 import com.kodatos.albumcollector.collection.models.CollectionModel
+import com.kodatos.albumcollector.collection.models.ManageCollectionAction
 import com.kodatos.albumcollector.collection.state.AllCollectionsState
 import com.kodatos.albumcollector.collection.viewmodel.AllCollectionsViewmodel
 import com.kodatos.albumcollector.core.adapter.*
@@ -50,7 +50,7 @@ class AllCollectionsScreen : BaseScreen<ScreenAllCollectionsBinding>() {
         binding.add.setOnClickListener {
             findNavController().navigate(
                 AllCollectionsScreenDirections.addCollection(
-                    AddCollectionAction.New
+                    ManageCollectionAction.New
                 )
             )
         }
@@ -64,7 +64,7 @@ class AllCollectionsScreen : BaseScreen<ScreenAllCollectionsBinding>() {
             CollectionItemListener.Edit -> {
                 findNavController().navigate(
                     AllCollectionsScreenDirections.addCollection(
-                        AddCollectionAction.Edit(model.id)
+                        ManageCollectionAction.Edit(model.id)
                     )
                 )
             }

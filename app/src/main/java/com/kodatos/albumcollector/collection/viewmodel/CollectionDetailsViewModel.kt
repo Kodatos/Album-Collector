@@ -35,8 +35,10 @@ class CollectionDetailsViewModel @Inject constructor(
         MutableStateFlow<CollectionAlbumsState>(CollectionAlbumsState.Loading)
     val collectionAlbumsState = _collectionAlbumsState.asStateFlow()
 
+    val collectionID
+        get() = CollectionDetailsScreenArgs.fromSavedStateHandle(savedStateHandle).id
+
     init {
-        val collectionID = CollectionDetailsScreenArgs.fromSavedStateHandle(savedStateHandle).id
         viewModelScope.launch(ioDispatcher) {
             collectionsDomain.getCollectionforId(collectionID)?.let {
                 _collectionHeaderState.value = CollectionDetailsHeaderState.Collection(it)
@@ -54,6 +56,12 @@ class CollectionDetailsViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    fun deleteAlbum(albumID: Long) {
+        viewModelScope.launch(ioDispatcher) {
+            collectionsDomain.deleteAlbumFromCollection(collectionID, albumID)
         }
     }
 }

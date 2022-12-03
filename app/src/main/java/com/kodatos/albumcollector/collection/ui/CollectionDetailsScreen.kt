@@ -1,5 +1,7 @@
 package com.kodatos.albumcollector.collection.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +9,12 @@ import androidx.core.graphics.Insets
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kodatos.albumcollector.R
 import com.kodatos.albumcollector.album.adapter.AlbumItemListener
 import com.kodatos.albumcollector.album.adapter.albumItem
 import com.kodatos.albumcollector.album.models.AlbumModel
+import com.kodatos.albumcollector.album.models.ManageAlbumAction
 import com.kodatos.albumcollector.collection.adapter.collectionHeaderItem
 import com.kodatos.albumcollector.collection.state.CollectionAlbumsState
 import com.kodatos.albumcollector.collection.state.CollectionDetailsHeaderState
@@ -33,6 +37,7 @@ class CollectionDetailsScreen : BaseScreen<ScreenViewCollectionBinding>() {
 
     override fun onBindingInflated(savedInstanceState: Bundle?) {
         binding.list.setAdapter {
+            spanCount = 2
             add(
                 viewModel.collectionHeaderState.createAdapterSection(viewLifecycleOwner) {
                     when (it) {
@@ -54,16 +59,32 @@ class CollectionDetailsScreen : BaseScreen<ScreenViewCollectionBinding>() {
                 }
             )
         }
+        binding.add.setOnClickListener {
+            findNavController().navigate(
+                CollectionDetailsScreenDirections.manageAlbum(
+                    ManageAlbumAction.CreateAndAdd(viewModel.collectionID)
+                )
+            )
+        }
     }
 
     private fun albumModelItem(albumModel: AlbumModel) = albumItem(albumModel) {
         when (it) {
-            AlbumItemListener.Delete -> {}
-            AlbumItemListener.Edit -> {}
-            is AlbumItemListener.View -> {}
+            AlbumItemListener.Delete -> {
+                viewModel.deleteAlbum(albumModel.id)
+            }
+            AlbumItemListener.Edit -> {
+                findNavController().navigate(
+                    CollectionDetailsScreenDirections.manageAlbum(
+                        ManageAlbumAction.Edit(albumModel.id)
+                    )
+                )
+            }
+            is AlbumItemListener.View -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.deeplink)))
+            }
         }
     }
-
 
     override fun applySystemBarInsets(insets: Insets) {
         binding.list.updatePadding(bottom = insets.bottom)

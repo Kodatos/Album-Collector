@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.kodatos.albumcollector.R
-import com.kodatos.albumcollector.collection.models.AddCollectionAction
-import com.kodatos.albumcollector.collection.viewmodel.AddCollectionViewModel
+import com.kodatos.albumcollector.collection.models.ManageCollectionAction
+import com.kodatos.albumcollector.collection.viewmodel.ManageCollectionViewModel
 import com.kodatos.albumcollector.core.coroutines.collectLatestLifecycle
 import com.kodatos.albumcollector.core.ui.*
 import com.kodatos.albumcollector.databinding.ScreenAddCollectionBinding
@@ -19,10 +19,10 @@ import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AddCollectionDialog : BaseBottomSheetDialog<ScreenAddCollectionBinding>() {
+class ManageCollectionDialog : BaseBottomSheetDialog<ScreenAddCollectionBinding>() {
 
-    private val viewModel: AddCollectionViewModel by viewModels()
-    private val args: AddCollectionDialogArgs by navArgs()
+    private val viewModel: ManageCollectionViewModel by viewModels()
+    private val args: ManageCollectionDialogArgs by navArgs()
 
     override fun onInflateBinding(
         layoutInflater: LayoutInflater,
@@ -45,8 +45,8 @@ class AddCollectionDialog : BaseBottomSheetDialog<ScreenAddCollectionBinding>() 
 
             header.setText(
                 when (args.action) {
-                    is AddCollectionAction.Edit -> R.string.edit_collections_header
-                    AddCollectionAction.New -> R.string.add_collections_header
+                    is ManageCollectionAction.Edit -> R.string.edit_collections_header
+                    ManageCollectionAction.New -> R.string.add_collections_header
                 }
             )
             imgEl.setEndIconOnClickListener {
@@ -64,7 +64,7 @@ class AddCollectionDialog : BaseBottomSheetDialog<ScreenAddCollectionBinding>() 
             }
 
             save.setOnClickListener {
-                lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.saveCollection(name.textString, imageUrl.textString)
                     dismiss()
                 }
